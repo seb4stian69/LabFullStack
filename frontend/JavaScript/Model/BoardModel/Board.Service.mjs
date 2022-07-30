@@ -32,9 +32,10 @@ export const getByIdFunction = async(url,id) =>{
 }
 
 // Funcion para enviar datos a mi api
-export const postFunction = async(url, name, createdAt, updatedAt) =>{
+export const postFunction = async(url, name, updatedAt) =>{
 
-    let data = methodBody('POST', name, createdAt, updatedAt)
+    let data = methodBody('POST', name, updatedAt)
+    console.log(data)
 
     try {
         await fetch(url, data)
@@ -47,9 +48,9 @@ export const postFunction = async(url, name, createdAt, updatedAt) =>{
 }
 
 // Funcion para actualizar datos de mi api
-export const putFunction = async(url,id, name, createdAt, updatedAt) => {
+export const putFunction = async(url,id, name, updatedAt) => {
 
-    let data = methodBody('PUT', name, createdAt, updatedAt)
+    let data = methodBody('PUT', name, updatedAt)
 
     try {
         await fetch(`${url}/${id}`, data)

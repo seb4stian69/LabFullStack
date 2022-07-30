@@ -1,4 +1,4 @@
-export const methodBody = (method, name, createdAt, updatedAt) =>{
+export const methodBody = (method, name, updatedAt) =>{
 
     return {
 
@@ -7,9 +7,8 @@ export const methodBody = (method, name, createdAt, updatedAt) =>{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: name || "",
-            createdAt: createdAt || "",
-            updatedAt: updatedAt || null
+            "name": name||'',
+            "updatedAt": updatedAt||null
         })
 
     }

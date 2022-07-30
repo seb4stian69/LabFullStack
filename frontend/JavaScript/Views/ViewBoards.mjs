@@ -1,5 +1,5 @@
 
-import { getByIdFunction, postFunction ,deleteFunction } from "../Model/BoardModel/Board.Service.mjs";
+import { getByIdFunction, postFunction ,deleteFunction,putFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { Url_Boards as url } from "../Utilities/config.mjs";
 
 export class Board {
@@ -24,9 +24,11 @@ export class Board {
 
         div.append(btnAdd)
 
-        btnAdd.addEventListener('click', ()=>{
+        btnAdd.addEventListener('click', async ()=>{
 
-            postFunction()
+            let name = prompt("Ingresa el nombre de la nueva tabla")
+
+            await postFunction(url,name)
 
         })
 
@@ -41,17 +43,21 @@ export class Board {
             const inputTextNameBoard = document.createElement("input")
             inputTextNameBoard.type ="text"
             inputTextNameBoard.value =item.name
+            inputTextNameBoard.readOnly = true
+            inputTextNameBoard.id = `btnName${item.id}`
 
             const verTablero = document.createElement("button")
             verTablero.className="verTablero"
             verTablero.id = item.id
 
             verTablero.addEventListener('click', ()=>{
-                alert(verTablero.id)
+                localStorage.setItem("id", verTablero.id)
             })
             
             const aEnlace = document.createElement("a")
-            aEnlace.href="./board.html" 
+            aEnlace.href="../../Html/board.html"
+            aEnlace.target="_blank"
+            aEnlace.rel="noopener noreferrer"
             aEnlace.innerHTML="Ver tablero"
 
             const buttonEdit = document.createElement("button")
@@ -59,9 +65,18 @@ export class Board {
             buttonEdit.className = "editarTablero"
             buttonEdit.innerHTML = "Editar"
 
-            buttonEdit.addEventListener('click', ()=>{
+            buttonEdit.addEventListener('click', async()=>{
+                
+                const id = verTablero.id
+                let btn = document.getElementById(`btnName${id}`)
+                btn.readOnly = false
+                btn.focus()
 
-                alert("El id a editar es: " + verTablero.id)
+                if(buttonEdit.innerHTML === "Cambiar"){
+                    await putFunction(url,id,inputTextNameBoard.value)
+                }
+
+                buttonEdit.innerHTML = "Cambiar"
 
             })
 
