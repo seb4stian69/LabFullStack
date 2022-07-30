@@ -1,4 +1,4 @@
-import { methodBody } from "../../Utilities/MethodBody.mjs"
+import { methodBody } from "./MethodBody.mjs"
 
 // Funcion para obtener los datos de mi api
 export const getFunction = async(url) =>{
@@ -32,9 +32,9 @@ export const getByIdFunction = async(url,id) =>{
 }
 
 // Funcion para enviar datos a mi api
-export const postFunction = async(url, charName, charLevel) =>{
+export const postFunction = async(url, name, createdAt, updatedAt) =>{
 
-    let data = methodBody('POST', charName, charLevel)
+    let data = methodBody('POST', name, createdAt, updatedAt)
 
     try {
         await fetch(url, data)
@@ -47,9 +47,9 @@ export const postFunction = async(url, charName, charLevel) =>{
 }
 
 // Funcion para actualizar datos de mi api
-export const putFunction = async(url,id, charName, charLevel) => {
+export const putFunction = async(url,id, name, createdAt, updatedAt) => {
 
-    let data = methodBody('PUT', charName, charLevel)
+    let data = methodBody('PUT', name, createdAt, updatedAt)
 
     try {
         await fetch(`${url}/${id}`, data)

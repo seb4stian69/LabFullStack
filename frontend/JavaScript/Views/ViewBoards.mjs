@@ -1,5 +1,5 @@
 
-import { getByIdFunction, deleteFunction } from "../Model/Services/Board.Service.mjs";
+import { getByIdFunction, postFunction ,deleteFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { Url_Boards as url } from "../Utilities/config.mjs";
 
 export class Board {
@@ -23,6 +23,12 @@ export class Board {
         btnAdd.innerHTML = "+"
 
         div.append(btnAdd)
+
+        btnAdd.addEventListener('click', ()=>{
+
+            postFunction()
+
+        })
 
         this.#data.data.forEach((item) => {
 
