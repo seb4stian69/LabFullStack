@@ -1,8 +1,6 @@
 package org.sofka.mykrello.controller;
 
-import org.sofka.mykrello.model.domain.LogDomain;
 import org.sofka.mykrello.model.domain.LogDto;
-import org.sofka.mykrello.model.domain.TaskDomain;
 import org.sofka.mykrello.model.service.LogDtoService;
 import org.sofka.mykrello.model.service.LogService;
 import org.sofka.mykrello.utilities.MyResponseUtility;
@@ -32,7 +30,7 @@ public class LogController {
 
     @GetMapping(path = "/log/{id}")
     public ResponseEntity<MyResponseUtility> getById(@PathVariable("id") Integer id){
-        response.data = logService.findById(id);
+        response.data = logDtoService.findById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

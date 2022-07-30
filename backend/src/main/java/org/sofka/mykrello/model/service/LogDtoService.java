@@ -20,7 +20,6 @@ public class LogDtoService implements LogDtoInterface {
         Optional<LogDto> log = logDtoRepository.findById(id);
         return log.orElse(null);
     }
-
     @Override
     public LogDto create(LogDto log) {
         return logDtoRepository.save(log);
