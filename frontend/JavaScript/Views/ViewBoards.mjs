@@ -1,6 +1,7 @@
 
 import { getByIdFunction, postFunction ,deleteFunction,putFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { Url_Boards as url } from "../Utilities/config.mjs";
+import { eliminarLog } from "../Utilities/UtilsFunctions.mjs";
 
 export class Board {
 
@@ -86,12 +87,27 @@ export class Board {
             buttonDel.addEventListener('click', async ()=>{
 
                 let data = await getByIdFunction(url,verTablero.id)
+                let taskData = data.data.task
 
-                console.log(data)
+                if (confirm(`seguro de eliminar este tablero? ${data.data.name}`)) {
 
-                alert("El id a eliminar es: " + verTablero.id)
+                    taskData.forEach( task =>{
 
-                await deleteFunction(url, verTablero.id)
+                        let logsData = task.logs
+    
+                        if(task.logs.length){
+                            logsData.forEach( log =>{ 
+    
+                                eliminarLog(log.id)
+        
+                            })
+                        }
+    
+                    })
+
+                    await deleteFunction(url, verTablero.id)
+                    
+                }               
 
             })
 

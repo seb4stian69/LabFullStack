@@ -6,6 +6,7 @@ import org.sofka.mykrello.model.service.interfaces.LogDtoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -14,6 +15,10 @@ public class LogDtoService implements LogDtoInterface {
 
     @Autowired
     private LogDtoRepository logDtoRepository;
+
+    public List<LogDto> findAll(){
+        return logDtoRepository.findAll();
+    }
 
     @Override
     public LogDto findById(Integer id) {

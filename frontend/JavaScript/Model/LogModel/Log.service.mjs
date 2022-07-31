@@ -1,6 +1,4 @@
 import { methodBody } from "./MethodBody.mjs"
-import {postFunction as postLog} from "../LogModel/Log.service.mjs"
-import { Url_Log as urlLog } from "../../Utilities/config.mjs"
 
 // Funcion para obtener los datos de mi api
 export const getFunction = async(url) =>{
@@ -34,9 +32,9 @@ export const getByIdFunction = async(url,id) =>{
 }
 
 // Funcion para enviar datos a mi api
-export const postFunction = async(url, name, description, column, board, date) =>{
+export const postFunction = async(url, taskId, columnaPrevious ,columnaCurrent) =>{
 
-    let data = methodBody('POST', name, description, column, board, date)
+    let data = methodBody('POST', taskId, columnaPrevious ,columnaCurrent)
     console.log(data)
 
     try {
@@ -45,16 +43,14 @@ export const postFunction = async(url, name, description, column, board, date) =
         console.log(err)
     }
 
-    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
+    location.reload()
 
 }
 
 // Funcion para actualizar datos de mi api
-export const putFunction = async(url, id, name, description, column, board, date) => {
+export const putFunction = async(url,id, taskId, columnaPrevious ,columnaCurrent) => {
 
-    await postLog(urlLog, id, localStorage.getItem("columnaTareaSeleccionada"),column)
-
-    let data = methodBody('PUT', name, description, column, board, date)
+    let data = methodBody('PUT', taskId, columnaPrevious ,columnaCurrent)
 
     try {
         await fetch(`${url}/${id}`, data)
@@ -62,7 +58,7 @@ export const putFunction = async(url, id, name, description, column, board, date
         console.log(err)
     }
 
-    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
+    location.reload()
 
 }
 

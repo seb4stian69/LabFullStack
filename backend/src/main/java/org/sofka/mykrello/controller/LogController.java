@@ -36,7 +36,7 @@ public class LogController {
 
     @GetMapping(path = "/log")
     public ResponseEntity<MyResponseUtility> get(){
-        response.data = logService.findAll();
+        response.data = logDtoService.findAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

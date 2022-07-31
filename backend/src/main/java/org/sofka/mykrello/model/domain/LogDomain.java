@@ -52,8 +52,6 @@ public class LogDomain implements Serializable {
     @JsonBackReference(value = "logCurrent")
     private ColumnDomain current;
 
-
-
     @JoinColumn(name = "tsk_id_task", insertable = false, updatable = false)
     @JsonBackReference(value = "log-task")
     @ManyToOne(fetch = FetchType.LAZY)

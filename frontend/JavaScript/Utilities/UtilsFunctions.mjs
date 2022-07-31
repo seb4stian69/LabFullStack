@@ -1,4 +1,6 @@
-import {getByIdFunction} from "../Model/BoardModel/Board.Service.mjs"
+import { deleteFunction } from "../Model/LogModel/Log.service.mjs";
+import {getByIdFunction} from "../Model/TaskModel/Task.Service.mjs"
+import { Url_Log as urlLog } from "./config.mjs";
 
 export const validar = (inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) =>{
 
@@ -24,22 +26,32 @@ export const columnCheck = (task, divTask,divTodo,divInprocess,divFinish) => {
             divFinish.append(divTask)
 }
 
-export const actualizarDatosTarea = async (taskId,btnCrearActualizar,urlBoard,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) => {
+export const actualizarDatosTarea = async (taskId,btnCrearActualizar,urlTask,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) => {
+ 
     if(btnCrearActualizar.innerHTML === "Editar"){
-            const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
-            const task = data.data.task
-            const tareaSeleccionada = task.filter(item => item.id == taskId)
-            const tituloTareaSeleccionada = tareaSeleccionada[0].name
-            const descripcionTareaSeleccionada = tareaSeleccionada[0].description
-            const entregaTareaSeleccionada =  tareaSeleccionada[0].delivery?.slice(0,10)
-            const columnaTareaSeleccionada = tareaSeleccionada[0].column
-            inputTitleModal.value = tituloTareaSeleccionada
-            txtAreaDescripcion.value = descripcionTareaSeleccionada
-            inputDeliveryDate.value = entregaTareaSeleccionada
-            // if(columnaTareaSeleccionada === 1) inputRdBtn1.checked = true
-            // if(columnaTareaSeleccionada === 2) inputRdBtn2.checked = true
-            // if(columnaTareaSeleccionada === 3) inputRdBtn3.checked = true
 
-            columnaTareaSeleccionada === 1 ? inputRdBtn1.checked = true : columnaTareaSeleccionada === 2 ? inputRdBtn2.checked = true : inputRdBtn3.checked = true
-        }
+        const dataFind = await getByIdFunction(urlTask, taskId)
+        const data = dataFind.data
+        const tituloTareaSeleccionada = data.name
+        const descripcionTareaSeleccionada = data.description
+        const entregaTareaSeleccionada =  data.delivery?.slice(0,10)
+        const columnaTareaSeleccionada = data.column
+
+        localStorage.setItem("columnaTareaSeleccionada", columnaTareaSeleccionada)
+
+        inputTitleModal.value = tituloTareaSeleccionada
+        txtAreaDescripcion.value = descripcionTareaSeleccionada
+        inputDeliveryDate.value = entregaTareaSeleccionada
+
+        columnaTareaSeleccionada === 1 ? inputRdBtn1.checked = true :
+        columnaTareaSeleccionada === 2 ? inputRdBtn2.checked = true : inputRdBtn3.checked = true
+
+    }
+
+}
+
+export const eliminarLog = async(idLog)=>{
+
+    await deleteFunction(urlLog, idLog)
+
 }

@@ -1,7 +1,8 @@
 import { getByIdFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { postFunction, putFunction, deleteFunction } from "../Model/TaskModel/Task.Service.mjs";
-import { Url_Boards as urlBoard, Url_Task as urlTask} from "../Utilities/config.mjs";
-import { validar, btnChecked, columnCheck, actualizarDatosTarea } from "../Utilities/UtilsFunctions.mjs";
+import { Url_Boards as urlBoard, Url_Task as urlTask, Url_Log as urlLog} from "../Utilities/config.mjs";
+import { validar, btnChecked, columnCheck, actualizarDatosTarea, eliminarLog } from "../Utilities/UtilsFunctions.mjs";
+import {getFunction as getLog, postFunction as postLog} from '../Model/LogModel/Log.service.mjs'
 
 export class ViewBoard {
 
@@ -116,9 +117,17 @@ export class ViewBoard {
 
             buttonEliminar.addEventListener('click', ()=>{
 
-                (confirm("Estas seguro de eliminar esta tarea"))?
-                deleteFunction(urlTask, task.id):
-                console.log("No se ha borrado")
+                if(confirm("Estas seguro de eliminar esta tarea")){
+                    
+                    if(task.logs.length){
+                        task.logs.forEach( log =>{
+                            eliminarLog(log.id)
+                        })
+                    }
+
+                    deleteFunction(urlTask, task.id)
+
+                }
 
             })
 
@@ -129,8 +138,6 @@ export class ViewBoard {
         })
     }
 }
-
-
 
 const viewModal = async ( typeModal, taskId ) => {
 
@@ -199,7 +206,7 @@ const viewModal = async ( typeModal, taskId ) => {
         btnCrearActualizar.innerHTML= typeModal
         
         // datos de la tarea en los input en dado caso sea editar
-        actualizarDatosTarea (taskId,btnCrearActualizar,urlBoard,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)
+        actualizarDatosTarea (taskId,btnCrearActualizar,urlTask,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)
       
 
         btnCrearActualizar.addEventListener("click", async ()=> {
@@ -245,8 +252,34 @@ const viewModal = async ( typeModal, taskId ) => {
         txtAreaLogActualizaciones.id="historialCambios"
         txtAreaLogActualizaciones.placeholder="Historial de cambios"
 
+        logs(txtAreaLogActualizaciones, taskId)
+
         // Append de elementos del modal
         modal.append(buttonModalSalir, inputTitleModal, txtAreaDescripcion,inputDeliveryDate, divRdioBtn1,divRdioBtn2,divRdioBtn3,btnCrearActualizar,btnDeleteReset,txtAreaLogActualizaciones)
 
 
 }
+
+const logs = async(txtAreaLogActualizaciones, id) =>{
+
+    const data = await getLog(urlLog)
+
+    data.data.forEach( log =>{
+        
+        if(log.taskId == id){
+
+            let fechaCreacion = log.createdAt
+            let arrayFecha = fechaCreacion.split("T")
+    
+            let fecha = arrayFecha[0]
+            let hora = arrayFecha[1]
+    
+            let templateMessage = `[${fecha}|${hora}] > La columna anterior fue: ${log.columnaPrevious} | La columna actual es: ${log.columnaCurrent}\n`
+            txtAreaLogActualizaciones.innerHTML+=templateMessage 
+
+        }
+
+    })
+
+}
+
