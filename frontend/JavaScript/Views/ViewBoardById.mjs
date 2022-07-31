@@ -1,5 +1,5 @@
 import { getByIdFunction } from "../Model/BoardModel/Board.Service.mjs";
-import { Url_Boards as urlBoard, Url_Task as urlTask } from "../Utilities/config.mjs";
+import { Url_Boards as urlBoard} from "../Utilities/config.mjs";
 
 export class ViewBoard {
 
@@ -10,7 +10,6 @@ export class ViewBoard {
     getBoard = async() =>{
 
         const root = document.getElementById('tableContentColumns')
-        const modal = document.getElementById('tableContentModal')
 
         const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
         const columns = data.data.columnsForBoard
@@ -41,6 +40,10 @@ export class ViewBoard {
         const todoButtonTitle = document.createElement("button")
         todoButtonTitle.className = "titleBtn"
         
+        todoButtonTitle.addEventListener('click', ()=>{
+            viewModal("Crear")
+        })
+
         const atodoButtonTitle = document.createElement("a")
         atodoButtonTitle.innerHTML="ToDo"
         atodoButtonTitle.href = "#IrVentanaFlotante"
@@ -49,6 +52,10 @@ export class ViewBoard {
 
         const inProcessButtonTitle = document.createElement("button")
         inProcessButtonTitle.className = "titleBtn"
+
+        inProcessButtonTitle.addEventListener('click', ()=>{
+            viewModal("Crear")
+        })
         
         const ainProcessButtonTitle = document.createElement("a")
         ainProcessButtonTitle.innerHTML="In process"
@@ -58,6 +65,10 @@ export class ViewBoard {
 
         const finishButtonTitle = document.createElement("button")
         finishButtonTitle.className = "titleBtn"
+
+        finishButtonTitle.addEventListener('click', ()=>{
+            viewModal("Crear")
+        })
         
         const afinishButtonTitle = document.createElement("a")
         afinishButtonTitle.innerHTML="Finish"
@@ -82,6 +93,12 @@ export class ViewBoard {
             
             const buttonEditar = document.createElement("button")
             buttonEditar.className = "editarTask"
+
+
+            buttonEditar.addEventListener('click', ()=>{
+                viewModal("Editar")
+            })
+
 
             const aEditar = document.createElement("a")
             aEditar.innerHTML ="Editar"
@@ -109,6 +126,15 @@ export class ViewBoard {
 
         })
     
+
+    }
+
+}
+
+const viewModal = ( typeModal ) => {
+
+        const modal = document.getElementById('tableContentModal')
+
         // Boton salir del modal
         const buttonModalSalir = document.createElement("button")
         buttonModalSalir.className = "modalBtnSalir"
@@ -120,13 +146,13 @@ export class ViewBoard {
         // Input del titulo de la tarea
         const inputTitleModal = document.createElement("input")
         inputTitleModal.className = "modalTxtTitle"
-        inputTitleModal.value = "Titulo de la tarea"
+        inputTitleModal.placeholder = "Titulo de la tarea"
 
         //textarea de la descripcion de la tarea
         const txtAreaDescripcion = document.createElement("textarea")
         txtAreaDescripcion.className = "modalTxtAreaDescrip"        
         txtAreaDescripcion.id = "descripcionTarea"      
-        txtAreaDescripcion.innerHTML = "Descripcion de la tarea"      
+        txtAreaDescripcion.placeholder = "Descripcion de la tarea"      
 
         // Date de la entrega
         const inputDeliveryDate = document.createElement("input")
@@ -170,39 +196,22 @@ export class ViewBoard {
         // ButtonActualizarCrear
         const btnCrearActualizar = document.createElement("button")
         btnCrearActualizar.className="modalBtnActualizar"
-        btnCrearActualizar.innerHTML="Actualizar"
+        btnCrearActualizar.innerHTML= typeModal
         
         // ButtonDeleteReset
         const btnDeleteReset = document.createElement("button") 
         btnDeleteReset.className="modalBtnDevolver"
-        btnDeleteReset.innerHTML="Elimianar"
+        btnDeleteReset.innerHTML="Resetear data"
 
         // Textarea de el log de actualizaciones
         const txtAreaLogActualizaciones = document.createElement("textarea")
         txtAreaLogActualizaciones.className="modalTxtAreaHistory"
         txtAreaLogActualizaciones.id="historialCambios"
-        txtAreaLogActualizaciones.innerHTML="Historial de cambios"
+        txtAreaLogActualizaciones.placeholder="Historial de cambios"
 
         // Append de elementos del modal
         modal.append(buttonModalSalir, inputTitleModal, txtAreaDescripcion,inputDeliveryDate, divRdioBtn1,divRdioBtn2,divRdioBtn3,btnCrearActualizar,btnDeleteReset,txtAreaLogActualizaciones)
 
-    }
-
-}
-
-const viewModal = ( typeModal ) => {
-
-    
-    //     <button class="modalBtnSalir" ><a href="#">Salir</a></button>
-    //     <input class="modalTxtTitle" type="text" value="Titulo de la tarea">
-    //     <textarea class="modalTxtAreaDescrip" id="descripcionTarea">Descripcion de la tarea </textarea>
-    //     <input class="modalDate" type="date">
-    //     <div class="rdBtn1" ><input class="modalR1" name="colun" type="radio"> <label>ToDo</label></div>
-    //     <div class="rdBtn2" ><input class="modalR2" name="colun" type="radio"> <label>In process</label></div>
-    //     <div class="rdBtn3" ><input class="modalR3" name="colun" type="radio"> <label>Finish</label></div>
-    //     <button class="modalBtnActualizar" >Actualizar</button>
-    //     <button class="modalBtnDevolver" >Devolver</button>
-    //     <textarea class="modalTxtAreaHistory" id="historialCambios" cols="30" rows="10">Historial de cambios</textarea>
 
 }
 
