@@ -56,8 +56,6 @@ export class Board {
             
             const aEnlace = document.createElement("a")
             aEnlace.href="../../Html/board.html"
-            aEnlace.target="_blank"
-            aEnlace.rel="noopener noreferrer"
             aEnlace.innerHTML="Ver tablero"
 
             const buttonEdit = document.createElement("button")
