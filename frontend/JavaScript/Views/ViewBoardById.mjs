@@ -96,7 +96,7 @@ export class ViewBoard {
 
 
             buttonEditar.addEventListener('click', ()=>{
-                viewModal("Editar")
+                viewModal("Editar", task.id)
             })
 
 
@@ -131,7 +131,7 @@ export class ViewBoard {
 
 }
 
-const viewModal = ( typeModal ) => {
+const viewModal = async ( typeModal, taskId ) => {
 
         const modal = document.getElementById('tableContentModal')
 
@@ -198,6 +198,30 @@ const viewModal = ( typeModal ) => {
         btnCrearActualizar.className="modalBtnActualizar"
         btnCrearActualizar.innerHTML= typeModal
         
+        // datos de la tarea en los input
+        const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
+        const task = data.data.task
+        const tareaSeleccionada = task.filter(item => item.id == taskId)
+        const tituloTareaSeleccionada = tareaSeleccionada[0].name
+        const descripcionTareaSeleccionada = tareaSeleccionada[0].description
+        const entregaTareaSeleccionada =  tareaSeleccionada[0].delivery?.slice(0,10)
+        const columnaTareaSeleccionada = tareaSeleccionada[0].column
+        inputTitleModal.value = tituloTareaSeleccionada
+        txtAreaDescripcion.value = descripcionTareaSeleccionada
+        inputDeliveryDate.value = entregaTareaSeleccionada
+        if(columnaTareaSeleccionada === 1) inputRdBtn1.checked = true
+        if(columnaTareaSeleccionada === 2) inputRdBtn2.checked = true
+        if(columnaTareaSeleccionada === 3) inputRdBtn3.checked = true
+
+
+        btnCrearActualizar.addEventListener("click", ()=> {
+            if(btnCrearActualizar.innerHTML === "Crear"){
+                alert('hola crear')
+            }else{ 
+                alert('hola editar')}
+                
+        })
+        
         // ButtonDeleteReset
         const btnDeleteReset = document.createElement("button") 
         btnDeleteReset.className="modalBtnDevolver"
@@ -214,5 +238,3 @@ const viewModal = ( typeModal ) => {
 
 
 }
-
-
