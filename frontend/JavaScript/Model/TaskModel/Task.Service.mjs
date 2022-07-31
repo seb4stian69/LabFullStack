@@ -43,7 +43,7 @@ export const postFunction = async(url, name, description, column, board, date) =
         console.log(err)
     }
 
-    location.reload()
+    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
 
 }
 
@@ -58,7 +58,7 @@ export const putFunction = async(url, id, name, description, column, board, date
         console.log(err)
     }
 
-    location.reload()
+    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
 
 }
 

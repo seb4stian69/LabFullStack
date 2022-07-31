@@ -1,5 +1,7 @@
 import { getByIdFunction } from "../Model/BoardModel/Board.Service.mjs";
-import { Url_Boards as urlBoard} from "../Utilities/config.mjs";
+import { postFunction, putFunction, deleteFunction } from "../Model/TaskModel/Task.Service.mjs";
+import { Url_Boards as urlBoard, Url_Task as urlTask} from "../Utilities/config.mjs";
+import { validar, btnChecked } from "../Utilities/UtilsFunctions.mjs";
 
 export class ViewBoard {
 
@@ -65,13 +67,14 @@ export class ViewBoard {
 
         const finishButtonTitle = document.createElement("button")
         finishButtonTitle.className = "titleBtn"
+        
+        const afinishButtonTitle = document.createElement("a")
+        afinishButtonTitle.innerHTML="Finish"
+        afinishButtonTitle.href = "#IrVentanaFlotante"
 
         finishButtonTitle.addEventListener('click', ()=>{
             viewModal("Crear")
         })
-        
-        const afinishButtonTitle = document.createElement("a")
-        afinishButtonTitle.innerHTML="Finish"
 
         divTodo.append(todoButtonTitle)
         divInprocess.append(inProcessButtonTitle)
@@ -109,6 +112,14 @@ export class ViewBoard {
             const buttonEliminar = document.createElement("button")
             buttonEliminar.innerHTML = "Eliminar"
             buttonEliminar.className="borrarTask"
+
+            buttonEliminar.addEventListener('click', ()=>{
+
+                (confirm("Estas seguro de eliminar esta tarea"))?
+                deleteFunction(urlTask, task.id):
+                console.log("No se ha borrado")
+
+            })
 
             divTask.append(h5Title,buttonEditar,buttonEliminar)
 
@@ -181,7 +192,6 @@ const viewModal = async ( typeModal, taskId ) => {
         labelRdioBtn2.innerHTML="In Process"
         divRdioBtn2.append(inputRdBtn2,labelRdioBtn2)
 
-
         // radioBtn2
         const divRdioBtn3 = document.createElement("div")
         divRdioBtn3.className="rdBtn3"
@@ -198,34 +208,59 @@ const viewModal = async ( typeModal, taskId ) => {
         btnCrearActualizar.className="modalBtnActualizar"
         btnCrearActualizar.innerHTML= typeModal
         
-        // datos de la tarea en los input
-        const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
-        const task = data.data.task
-        const tareaSeleccionada = task.filter(item => item.id == taskId)
-        const tituloTareaSeleccionada = tareaSeleccionada[0].name
-        const descripcionTareaSeleccionada = tareaSeleccionada[0].description
-        const entregaTareaSeleccionada =  tareaSeleccionada[0].delivery?.slice(0,10)
-        const columnaTareaSeleccionada = tareaSeleccionada[0].column
-        inputTitleModal.value = tituloTareaSeleccionada
-        txtAreaDescripcion.value = descripcionTareaSeleccionada
-        inputDeliveryDate.value = entregaTareaSeleccionada
-        if(columnaTareaSeleccionada === 1) inputRdBtn1.checked = true
-        if(columnaTareaSeleccionada === 2) inputRdBtn2.checked = true
-        if(columnaTareaSeleccionada === 3) inputRdBtn3.checked = true
+        // datos de la tarea en los input en dado caso sea editar
+        if(btnCrearActualizar.innerHTML === "Editar"){
+            const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
+            const task = data.data.task
+            const tareaSeleccionada = task.filter(item => item.id == taskId)
+            const tituloTareaSeleccionada = tareaSeleccionada[0].name
+            const descripcionTareaSeleccionada = tareaSeleccionada[0].description
+            const entregaTareaSeleccionada =  tareaSeleccionada[0].delivery?.slice(0,10)
+            const columnaTareaSeleccionada = tareaSeleccionada[0].column
+            inputTitleModal.value = tituloTareaSeleccionada
+            txtAreaDescripcion.value = descripcionTareaSeleccionada
+            inputDeliveryDate.value = entregaTareaSeleccionada
+            if(columnaTareaSeleccionada === 1) inputRdBtn1.checked = true
+            if(columnaTareaSeleccionada === 2) inputRdBtn2.checked = true
+            if(columnaTareaSeleccionada === 3) inputRdBtn3.checked = true
+        }
 
+        btnCrearActualizar.addEventListener("click", async ()=> {
 
-        btnCrearActualizar.addEventListener("click", ()=> {
             if(btnCrearActualizar.innerHTML === "Crear"){
-                alert('hola crear')
+
+                validar(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) ? 
+                alert("Faltan datos por ingresar para enviar el formulario"):
+                await postFunction(
+                    urlTask,
+                    inputTitleModal.value,
+                    txtAreaDescripcion.value,
+                    btnChecked(inputRdBtn1,inputRdBtn2),
+                    localStorage.getItem("id"),
+                    inputDeliveryDate.value + "T00:00:00.00"
+                )
+
             }else{ 
-                alert('hola editar')}
+                validar(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) ? 
+                alert("Faltan datos por ingresar para enviar el formulario"): 
+                await putFunction(
+                    urlTask,
+                    taskId,
+                    inputTitleModal.value,
+                    txtAreaDescripcion.value,
+                    btnChecked(inputRdBtn1,inputRdBtn2),
+                    localStorage.getItem("id"),
+                    inputDeliveryDate.value + "T00:00:00.00"
+                )
+            }
                 
         })
         
         // ButtonDeleteReset
-        const btnDeleteReset = document.createElement("button") 
+        const btnDeleteReset = document.createElement("input")
+        btnDeleteReset.type = "reset"
         btnDeleteReset.className="modalBtnDevolver"
-        btnDeleteReset.innerHTML="Resetear data"
+        btnDeleteReset.value="Resetear data"
 
         // Textarea de el log de actualizaciones
         const txtAreaLogActualizaciones = document.createElement("textarea")
