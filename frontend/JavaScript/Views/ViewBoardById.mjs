@@ -1,7 +1,7 @@
 import { getByIdFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { postFunction, putFunction, deleteFunction } from "../Model/TaskModel/Task.Service.mjs";
 import { Url_Boards as urlBoard, Url_Task as urlTask} from "../Utilities/config.mjs";
-import { validar, btnChecked } from "../Utilities/UtilsFunctions.mjs";
+import { validar, btnChecked, columnCheck, actualizarDatosTarea } from "../Utilities/UtilsFunctions.mjs";
 
 export class ViewBoard {
 
@@ -84,8 +84,9 @@ export class ViewBoard {
 
         root.append(divTodo,divInprocess,divFinish)
 
-        // Agregando tareas a su columna diferente
 
+
+        // Agregando tareas a su columna diferente
         task.forEach( task =>{
 
             const divTask = document.createElement("div")
@@ -122,25 +123,14 @@ export class ViewBoard {
             })
 
             divTask.append(h5Title,buttonEditar,buttonEliminar)
-
-            if(task.column === 1){
-                divTodo.append(divTask)
-            }
-
-            if(task.column === 2){
-                divInprocess.append(divTask)
-            }
-
-            if(task.column === 3){
-                divFinish.append(divTask)
-            }
+            
+            columnCheck(task,divTask,divTodo,divInprocess,divFinish)
 
         })
-    
-
     }
-
 }
+
+
 
 const viewModal = async ( typeModal, taskId ) => {
 
@@ -209,21 +199,8 @@ const viewModal = async ( typeModal, taskId ) => {
         btnCrearActualizar.innerHTML= typeModal
         
         // datos de la tarea en los input en dado caso sea editar
-        if(btnCrearActualizar.innerHTML === "Editar"){
-            const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
-            const task = data.data.task
-            const tareaSeleccionada = task.filter(item => item.id == taskId)
-            const tituloTareaSeleccionada = tareaSeleccionada[0].name
-            const descripcionTareaSeleccionada = tareaSeleccionada[0].description
-            const entregaTareaSeleccionada =  tareaSeleccionada[0].delivery?.slice(0,10)
-            const columnaTareaSeleccionada = tareaSeleccionada[0].column
-            inputTitleModal.value = tituloTareaSeleccionada
-            txtAreaDescripcion.value = descripcionTareaSeleccionada
-            inputDeliveryDate.value = entregaTareaSeleccionada
-            if(columnaTareaSeleccionada === 1) inputRdBtn1.checked = true
-            if(columnaTareaSeleccionada === 2) inputRdBtn2.checked = true
-            if(columnaTareaSeleccionada === 3) inputRdBtn3.checked = true
-        }
+        actualizarDatosTarea (taskId,btnCrearActualizar,urlBoard,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)
+      
 
         btnCrearActualizar.addEventListener("click", async ()=> {
 
