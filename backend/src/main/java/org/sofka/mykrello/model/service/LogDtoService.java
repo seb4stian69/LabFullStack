@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 @Service
 public class LogDtoService implements LogDtoInterface {
@@ -18,6 +19,8 @@ public class LogDtoService implements LogDtoInterface {
     private LogDtoRepository logDtoRepository;
 
 =======
+=======
+>>>>>>> testBranch
 /**
  * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
  * @Description Clase tipo Servicio para el manejo del log
@@ -37,13 +40,19 @@ public class LogDtoService implements LogDtoInterface {
      * @Description Devuelve una lista de Log
      * @return listado de Log
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     public List<LogDto> findAll(){
         return logDtoRepository.findAll();
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
     /**
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description Devuelve un Log de acuerdo al id
@@ -51,14 +60,20 @@ public class LogDtoService implements LogDtoInterface {
      * @return Log
      ** @Anotation Override
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @Override
     public LogDto findById(Integer id) {
         Optional<LogDto> log = logDtoRepository.findById(id);
         return log.orElse(null);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
 
     /**
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
@@ -67,14 +82,20 @@ public class LogDtoService implements LogDtoInterface {
      * @return Log
      ** @Anotation Override
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @Override
     public LogDto create(LogDto log) {
         return logDtoRepository.save(log);
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
     /**
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description Actualiza un Log de acuerdo a la informacion entregada
@@ -82,7 +103,10 @@ public class LogDtoService implements LogDtoInterface {
      * @return Log
      ** @Anotation Override
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @Override
     public LogDto update(LogDto log) {
         return logDtoRepository.save(log);

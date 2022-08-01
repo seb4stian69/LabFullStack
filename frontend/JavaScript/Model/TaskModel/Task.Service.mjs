@@ -4,13 +4,19 @@ import { Url_Log as urlLog } from "../../Utilities/config.mjs"
 
 // Funcion para obtener los datos de mi api
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
 
 /**
  * Funcion para obtener los datos de la api
  * @param {String} url 
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 export const getFunction = async(url) =>{
 
     try {
@@ -27,13 +33,19 @@ export const getFunction = async(url) =>{
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
 /**
  * Funcion para traer un dato especifico de acuerdo al id
  * @param {String} url 
  * @param {Number} id 
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 export const getByIdFunction = async(url,id) =>{
 
     try {
@@ -50,8 +62,11 @@ export const getByIdFunction = async(url,id) =>{
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Funcion para enviar datos a mi api
 =======
+=======
+>>>>>>> testBranch
 /**
  * Funcion para crear una tarea 
  * @param {String} url 
@@ -61,7 +76,10 @@ export const getByIdFunction = async(url,id) =>{
  * @param {Number} board 
  * @param {String} date 
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 export const postFunction = async(url, name, description, column, board, date) =>{
 
     let data = methodBody('POST', name, description, column, board, date)
@@ -78,8 +96,11 @@ export const postFunction = async(url, name, description, column, board, date) =
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Funcion para actualizar datos de mi api
 =======
+=======
+>>>>>>> testBranch
 /**
  * Funcion para actualizar una tarea
  * @param {String} url 
@@ -90,7 +111,10 @@ export const postFunction = async(url, name, description, column, board, date) =
  * @param {Number} board 
  * @param {String} date 
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 export const putFunction = async(url, id, name, description, column, board, date) => {
 
     await postLog(urlLog, id, localStorage.getItem("columnaTareaSeleccionada"),column)
@@ -108,14 +132,20 @@ export const putFunction = async(url, id, name, description, column, board, date
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Funcion para eliminar datos de mi api
 =======
+=======
+>>>>>>> testBranch
 /**
  * funcion para eliminar una tarea 
  * @param {String} url 
  * @param {Number} id 
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 export const deleteFunction = async(url,id) =>{
 
     let data = methodBody('DELETE')
@@ -127,10 +157,15 @@ export const deleteFunction = async(url,id) =>{
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     location.reload()
 =======
     window.location.href = 'http://127.0.0.1:5501/Html/board.html';
 
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
+
+>>>>>>> testBranch
 
 }

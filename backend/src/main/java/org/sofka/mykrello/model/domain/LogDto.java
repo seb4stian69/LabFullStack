@@ -9,15 +9,21 @@ import java.io.Serializable;
 import java.time.Instant;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> testBranch
 /***
  * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
  * @Description aqui se mapean los datos de la tabla "krl_log"
  * @Params None
  * @Anotations Entity - Table - Getter - Setter
  */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 @Entity /**/ @Table(name = "krl_log")
 @Getter /**/ @Setter
 public class LogDto implements Serializable {
@@ -26,14 +32,20 @@ public class LogDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
     /***
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description atributos del objeto Log
      * @Anotations Id - GeneratedValue - Column
      */
 
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "log_id", updatable = false)

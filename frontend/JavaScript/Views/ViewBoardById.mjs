@@ -3,8 +3,11 @@ import { postFunction, putFunction, deleteFunction } from "../Model/TaskModel/Ta
 import { Url_Boards as urlBoard, Url_Task as urlTask, Url_Log as urlLog} from "../Utilities/config.mjs";
 import { validar, btnChecked, columnCheck, actualizarDatosTarea, eliminarLog } from "../Utilities/UtilsFunctions.mjs";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {getFunction as getLog, postFunction as postLog} from '../Model/LogModel/Log.service.mjs'
 =======
+=======
+>>>>>>> testBranch
 import {getFunction as getLog} from '../Model/LogModel/Log.service.mjs'
 
 /**
@@ -16,7 +19,10 @@ import {getFunction as getLog} from '../Model/LogModel/Log.service.mjs'
  const todoButtonTitle = document.createElement("button")
  const inProcessButtonTitle = document.createElement("button")
  const finishButtonTitle = document.createElement("button")
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 
 export class ViewBoard {
 
@@ -25,11 +31,14 @@ export class ViewBoard {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     getBoard = async() =>{
 
         const root = document.getElementById('tableContentColumns')
 
 =======
+=======
+>>>>>>> testBranch
     /**
      * metodo para la creacion e inyeccion de elementos al dom que muestra el tablero seleccionado
      */
@@ -46,16 +55,23 @@ export class ViewBoard {
         body.append(botonSalirpagina)
 
         // Datos traidos desde la Api
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
         const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
         const columns = data.data.columnsForBoard
         const task = data.data.task
         let index = 0
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         // Se crean las 3 columnas 
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+        // Se crean las 3 columnas 
+>>>>>>> testBranch
         columns.forEach( column => {
             
             index+=1
@@ -78,6 +94,7 @@ export class ViewBoard {
         divFinish.id="finish"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         const todoButtonTitle = document.createElement("button")
         todoButtonTitle.className = "titleBtn"
         
@@ -89,12 +106,17 @@ export class ViewBoard {
         todoButtonTitle.className = "titleBtn"
         
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+        todoButtonTitle.className = "titleBtn"
+        
+>>>>>>> testBranch
         const atodoButtonTitle = document.createElement("a")
         atodoButtonTitle.innerHTML="ToDo"
         atodoButtonTitle.href = "#IrVentanaFlotante"
 
         todoButtonTitle.append(atodoButtonTitle)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         const inProcessButtonTitle = document.createElement("button")
         inProcessButtonTitle.className = "titleBtn"
@@ -105,6 +127,9 @@ export class ViewBoard {
 =======
         inProcessButtonTitle.className = "titleBtn"
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+        inProcessButtonTitle.className = "titleBtn"
+>>>>>>> testBranch
         
         const ainProcessButtonTitle = document.createElement("a")
         ainProcessButtonTitle.innerHTML="In process"
@@ -113,15 +138,19 @@ export class ViewBoard {
         inProcessButtonTitle.append(ainProcessButtonTitle)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         const finishButtonTitle = document.createElement("button")
 =======
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
         finishButtonTitle.className = "titleBtn"
         
         const afinishButtonTitle = document.createElement("a")
         afinishButtonTitle.innerHTML="Finish"
         afinishButtonTitle.href = "#IrVentanaFlotante"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         finishButtonTitle.addEventListener('click', ()=>{
             viewModal("Crear")
@@ -130,6 +159,9 @@ export class ViewBoard {
 =======
         // Se agregan los elementos a los contenedores principales
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+        // Se agregan los elementos a los contenedores principales
+>>>>>>> testBranch
         divTodo.append(todoButtonTitle)
         divInprocess.append(inProcessButtonTitle)
         divFinish.append(finishButtonTitle)
@@ -173,6 +205,7 @@ export class ViewBoard {
                 if(confirm("Estas seguro de eliminar esta tarea")){
                     
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if(task.logs.length){
                         task.logs.forEach( log =>{
                             eliminarLog(log.id)
@@ -182,6 +215,9 @@ export class ViewBoard {
 =======
                     deleteLog(task)
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+                    deleteLog(task)
+>>>>>>> testBranch
                     deleteFunction(urlTask, task.id)
 
                 }
@@ -197,11 +233,17 @@ export class ViewBoard {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /**
     * metodo para creacion e inyeccion de elementos al dom que muesta el modal
  */
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+/**
+    * metodo para creacion e inyeccion de elementos al dom que muesta el modal
+ */
+>>>>>>> testBranch
 const viewModal = async ( typeModal, taskId ) => {
 
         const modal = document.getElementById('tableContentModal')
@@ -272,6 +314,7 @@ const viewModal = async ( typeModal, taskId ) => {
         actualizarDatosTarea (taskId,btnCrearActualizar,urlTask,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)
       
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         btnCrearActualizar.addEventListener("click", async ()=> {
 
@@ -310,6 +353,8 @@ const viewModal = async ( typeModal, taskId ) => {
         btnDeleteReset.className="modalBtnDevolver"
         btnDeleteReset.value="Resetear data"
 =======
+=======
+>>>>>>> testBranch
         btnCrearActualizar.addEventListener("click", async ()=> {
 
             (btnCrearActualizar.innerHTML === "Crear")?
@@ -317,7 +362,10 @@ const viewModal = async ( typeModal, taskId ) => {
             enviarPutTask(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3,taskId)
     
         })
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 
         // Textarea de el log de actualizaciones
         const txtAreaLogActualizaciones = document.createElement("textarea")
@@ -325,9 +373,12 @@ const viewModal = async ( typeModal, taskId ) => {
         txtAreaLogActualizaciones.id="historialCambios"
         txtAreaLogActualizaciones.placeholder="Historial de cambios"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         logs(txtAreaLogActualizaciones, taskId)
 =======
+=======
+>>>>>>> testBranch
         txtAreaLogActualizaciones.readOnly = true
 
         logs(txtAreaLogActualizaciones, taskId)
@@ -347,7 +398,10 @@ const viewModal = async ( typeModal, taskId ) => {
             inputRdBtn3.checked = false
 
         })
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 
         // Append de elementos del modal
         modal.append(buttonModalSalir, inputTitleModal, txtAreaDescripcion,inputDeliveryDate, divRdioBtn1,divRdioBtn2,divRdioBtn3,btnCrearActualizar,btnDeleteReset,txtAreaLogActualizaciones)
@@ -356,14 +410,20 @@ const viewModal = async ( typeModal, taskId ) => {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
 /**
  * metodo para manejar los logs de las tareas
  * @param {HTML tag} txtAreaLogActualizaciones 
  * @param {Number} id 
  */
 
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 const logs = async(txtAreaLogActualizaciones, id) =>{
 
     const data = await getLog(urlLog)
@@ -388,7 +448,10 @@ const logs = async(txtAreaLogActualizaciones, id) =>{
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
 /**
  * metodo para eliminar un log asociado a una tarea
  * @param {Object} task 
@@ -466,5 +529,9 @@ inProcessButtonTitle.addEventListener('click', ()=>{
 // Lanza la funcion que muestra el modal de crear si dan click
 finishButtonTitle.addEventListener('click', ()=>{
     viewModal("Crear")
+<<<<<<< HEAD
 })
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+})
+>>>>>>> testBranch

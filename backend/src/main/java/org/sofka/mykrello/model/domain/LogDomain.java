@@ -46,12 +46,17 @@ public class LogDomain implements Serializable {
     private Integer taskId;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    // @Column(name = "clm_id_previous")
    // private Integer columnaPrevious;
 =======
     // @Column(name = "clm_id_previous")
     // private Integer columnaPrevious;
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+    // @Column(name = "clm_id_previous")
+    // private Integer columnaPrevious;
+>>>>>>> testBranch
 
     //@Column(name = "clm_id_current")
     //private Integer columnaCurrent;
@@ -60,13 +65,19 @@ public class LogDomain implements Serializable {
     private Instant createdAt = Instant.now();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
     /***
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description mapeo de relaciones - muchos Logs pertenecen a una columna & muchos Logs pertenecen a una tarea-
      * @Anotations OneToMany - JsonBackReference - JoinColumn
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false)
     @JoinColumn(name = "clm_id_previous", updatable = false)
     @JsonBackReference(value = "logPrevious")

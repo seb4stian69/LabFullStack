@@ -66,16 +66,22 @@ public class TaskDomain implements Serializable {
     private Instant updatedT;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     @JsonManagedReference(value = "log-task")
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, targetEntity = LogDomain.class)
     private List<LogDomain> logs = new ArrayList<>();
 =======
+=======
+>>>>>>> testBranch
     /***
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description mapeo de relaciones - una tarea posee muchos Logs & muchas tareas pertenecen a una columna & muchas tareas pertenecen a un tablero-
      * @Anotations OneToMany - JsonManagedReference - JsonManagedReference
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
 
     @JsonManagedReference(value = "log-task")
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, targetEntity = LogDomain.class)

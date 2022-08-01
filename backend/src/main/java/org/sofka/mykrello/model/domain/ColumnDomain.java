@@ -57,13 +57,19 @@ public class ColumnDomain implements Serializable {
     private Instant updatedAt;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> testBranch
     /***
      * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
      * @Description mapeo de relaciones - una columna muchos Logs & una columna muchas columnas para tablero-
      * @Anotations OneToMany - JsonManagedReference
      */
+<<<<<<< HEAD
 >>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
+=======
+>>>>>>> testBranch
     @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, mappedBy = "previous")
     @JsonManagedReference(value = "logPrevious")
     private List<LogDomain> logPrevious = new ArrayList<>();
