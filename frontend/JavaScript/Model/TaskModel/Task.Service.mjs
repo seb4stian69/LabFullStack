@@ -3,6 +3,14 @@ import {postFunction as postLog} from "../LogModel/Log.service.mjs"
 import { Url_Log as urlLog } from "../../Utilities/config.mjs"
 
 // Funcion para obtener los datos de mi api
+<<<<<<< HEAD
+=======
+
+/**
+ * Funcion para obtener los datos de la api
+ * @param {String} url 
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const getFunction = async(url) =>{
 
     try {
@@ -18,6 +26,14 @@ export const getFunction = async(url) =>{
 
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * Funcion para traer un dato especifico de acuerdo al id
+ * @param {String} url 
+ * @param {Number} id 
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const getByIdFunction = async(url,id) =>{
 
     try {
@@ -33,7 +49,19 @@ export const getByIdFunction = async(url,id) =>{
 
 }
 
+<<<<<<< HEAD
 // Funcion para enviar datos a mi api
+=======
+/**
+ * Funcion para crear una tarea 
+ * @param {String} url 
+ * @param {String} name 
+ * @param {String} description 
+ * @param {Number} column 
+ * @param {Number} board 
+ * @param {String} date 
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const postFunction = async(url, name, description, column, board, date) =>{
 
     let data = methodBody('POST', name, description, column, board, date)
@@ -49,7 +77,20 @@ export const postFunction = async(url, name, description, column, board, date) =
 
 }
 
+<<<<<<< HEAD
 // Funcion para actualizar datos de mi api
+=======
+/**
+ * Funcion para actualizar una tarea
+ * @param {String} url 
+ * @param {Number} id 
+ * @param {String} name 
+ * @param {String} description 
+ * @param {Number} column 
+ * @param {Number} board 
+ * @param {String} date 
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const putFunction = async(url, id, name, description, column, board, date) => {
 
     await postLog(urlLog, id, localStorage.getItem("columnaTareaSeleccionada"),column)
@@ -66,7 +107,15 @@ export const putFunction = async(url, id, name, description, column, board, date
 
 }
 
+<<<<<<< HEAD
 // Funcion para eliminar datos de mi api
+=======
+/**
+ * funcion para eliminar una tarea 
+ * @param {String} url 
+ * @param {Number} id 
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const deleteFunction = async(url,id) =>{
 
     let data = methodBody('DELETE')
@@ -77,6 +126,11 @@ export const deleteFunction = async(url,id) =>{
         console.log(err)
     }
 
+<<<<<<< HEAD
     location.reload()
+=======
+    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
+
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 
 }

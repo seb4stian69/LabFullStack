@@ -1,4 +1,15 @@
 
+<<<<<<< HEAD
+=======
+/**
+ * metodo HTTP para el llamado de la api
+ * @param String*} method 
+ * @param {Number} taskId 
+ * @param {Number} columnaPrevious 
+ * @param {Number} columnaCurrent 
+ */
+
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 export const methodBody = (method, taskId, columnaPrevious ,columnaCurrent) =>{
 
     return {

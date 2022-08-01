@@ -13,7 +13,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/***
+ * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
+ * @Description aqui se mapean los datos de la tabla "krl_board" y las relaciones entre tablas
+ * @Params None
+ * @Anotations Entity - Table - Getter - Setter
+ */
 @Entity /**/ @Table(name = "krl_task")
 @Getter /**/ @Setter
 
@@ -27,6 +32,12 @@ public class TaskDomain implements Serializable {
         if (this.updatedT == null)
             this.updatedT = Instant.now();
     }
+
+    /***
+     * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
+     * @Description atributos del objeto tablero
+     * @Anotations Id - GeneratedValue - Column
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,11 +65,21 @@ public class TaskDomain implements Serializable {
     @Column(name = "tsk_updated_at")
     private Instant updatedT;
 
+<<<<<<< HEAD
     @JsonManagedReference(value = "log-task")
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, targetEntity = LogDomain.class)
     private List<LogDomain> logs = new ArrayList<>();
+=======
+    /***
+     * @Author [Julian Lasso] - Sebastian santis - Sebastian Torres
+     * @Description mapeo de relaciones - una tarea posee muchos Logs & muchas tareas pertenecen a una columna & muchas tareas pertenecen a un tablero-
+     * @Anotations OneToMany - JsonManagedReference - JsonManagedReference
+     */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 
-    // Relaciones
+    @JsonManagedReference(value = "log-task")
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, targetEntity = LogDomain.class)
+    private List<LogDomain> logs = new ArrayList<>();
 
     @JoinColumn(name = "clm_id_column", insertable = false, updatable = false)
     @JsonBackReference(value = "column-tasks")

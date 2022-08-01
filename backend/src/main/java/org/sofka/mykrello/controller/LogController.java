@@ -102,4 +102,8 @@ public class LogController {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445

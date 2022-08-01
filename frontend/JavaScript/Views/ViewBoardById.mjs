@@ -2,7 +2,21 @@ import { getByIdFunction } from "../Model/BoardModel/Board.Service.mjs";
 import { postFunction, putFunction, deleteFunction } from "../Model/TaskModel/Task.Service.mjs";
 import { Url_Boards as urlBoard, Url_Task as urlTask, Url_Log as urlLog} from "../Utilities/config.mjs";
 import { validar, btnChecked, columnCheck, actualizarDatosTarea, eliminarLog } from "../Utilities/UtilsFunctions.mjs";
+<<<<<<< HEAD
 import {getFunction as getLog, postFunction as postLog} from '../Model/LogModel/Log.service.mjs'
+=======
+import {getFunction as getLog} from '../Model/LogModel/Log.service.mjs'
+
+/**
+ * vista de un tablero especifico
+ * @class
+ */
+
+ const botonSalirpagina = document.createElement("button")
+ const todoButtonTitle = document.createElement("button")
+ const inProcessButtonTitle = document.createElement("button")
+ const finishButtonTitle = document.createElement("button")
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 
 export class ViewBoard {
 
@@ -10,15 +24,38 @@ export class ViewBoard {
         // Utility class
     }
 
+<<<<<<< HEAD
     getBoard = async() =>{
 
         const root = document.getElementById('tableContentColumns')
 
+=======
+    /**
+     * metodo para la creacion e inyeccion de elementos al dom que muestra el tablero seleccionado
+     */
+    getBoard = async() =>{
+
+        // Div raiz 
+        const root = document.getElementById('tableContentColumns')
+        const body = document.getElementById('body')
+
+        // Boton de salir de la pagina
+        botonSalirpagina.className = "salirDelBoard"
+        botonSalirpagina.innerHTML="Salir"
+
+        body.append(botonSalirpagina)
+
+        // Datos traidos desde la Api
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         const data = await getByIdFunction(urlBoard, localStorage.getItem("id"))
         const columns = data.data.columnsForBoard
         const task = data.data.task
         let index = 0
     
+<<<<<<< HEAD
+=======
+        // Se crean las 3 columnas 
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         columns.forEach( column => {
             
             index+=1
@@ -40,6 +77,7 @@ export class ViewBoard {
         divFinish.className="column"
         divFinish.id="finish"
 
+<<<<<<< HEAD
         const todoButtonTitle = document.createElement("button")
         todoButtonTitle.className = "titleBtn"
         
@@ -47,18 +85,26 @@ export class ViewBoard {
             viewModal("Crear")
         })
 
+=======
+        todoButtonTitle.className = "titleBtn"
+        
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         const atodoButtonTitle = document.createElement("a")
         atodoButtonTitle.innerHTML="ToDo"
         atodoButtonTitle.href = "#IrVentanaFlotante"
 
         todoButtonTitle.append(atodoButtonTitle)
 
+<<<<<<< HEAD
         const inProcessButtonTitle = document.createElement("button")
         inProcessButtonTitle.className = "titleBtn"
 
         inProcessButtonTitle.addEventListener('click', ()=>{
             viewModal("Crear")
         })
+=======
+        inProcessButtonTitle.className = "titleBtn"
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         
         const ainProcessButtonTitle = document.createElement("a")
         ainProcessButtonTitle.innerHTML="In process"
@@ -66,17 +112,24 @@ export class ViewBoard {
 
         inProcessButtonTitle.append(ainProcessButtonTitle)
 
+<<<<<<< HEAD
         const finishButtonTitle = document.createElement("button")
+=======
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         finishButtonTitle.className = "titleBtn"
         
         const afinishButtonTitle = document.createElement("a")
         afinishButtonTitle.innerHTML="Finish"
         afinishButtonTitle.href = "#IrVentanaFlotante"
 
+<<<<<<< HEAD
         finishButtonTitle.addEventListener('click', ()=>{
             viewModal("Crear")
         })
 
+=======
+        // Se agregan los elementos a los contenedores principales
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
         divTodo.append(todoButtonTitle)
         divInprocess.append(inProcessButtonTitle)
         divFinish.append(finishButtonTitle)
@@ -119,12 +172,16 @@ export class ViewBoard {
 
                 if(confirm("Estas seguro de eliminar esta tarea")){
                     
+<<<<<<< HEAD
                     if(task.logs.length){
                         task.logs.forEach( log =>{
                             eliminarLog(log.id)
                         })
                     }
 
+=======
+                    deleteLog(task)
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
                     deleteFunction(urlTask, task.id)
 
                 }
@@ -139,6 +196,12 @@ export class ViewBoard {
     }
 }
 
+<<<<<<< HEAD
+=======
+/**
+    * metodo para creacion e inyeccion de elementos al dom que muesta el modal
+ */
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 const viewModal = async ( typeModal, taskId ) => {
 
         const modal = document.getElementById('tableContentModal')
@@ -208,6 +271,7 @@ const viewModal = async ( typeModal, taskId ) => {
         // datos de la tarea en los input en dado caso sea editar
         actualizarDatosTarea (taskId,btnCrearActualizar,urlTask,inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)
       
+<<<<<<< HEAD
 
         btnCrearActualizar.addEventListener("click", async ()=> {
 
@@ -245,14 +309,45 @@ const viewModal = async ( typeModal, taskId ) => {
         btnDeleteReset.type = "reset"
         btnDeleteReset.className="modalBtnDevolver"
         btnDeleteReset.value="Resetear data"
+=======
+        btnCrearActualizar.addEventListener("click", async ()=> {
+
+            (btnCrearActualizar.innerHTML === "Crear")?
+            enviarPostTask(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3):
+            enviarPutTask(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3,taskId)
+    
+        })
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 
         // Textarea de el log de actualizaciones
         const txtAreaLogActualizaciones = document.createElement("textarea")
         txtAreaLogActualizaciones.className="modalTxtAreaHistory"
         txtAreaLogActualizaciones.id="historialCambios"
         txtAreaLogActualizaciones.placeholder="Historial de cambios"
+<<<<<<< HEAD
 
         logs(txtAreaLogActualizaciones, taskId)
+=======
+        txtAreaLogActualizaciones.readOnly = true
+
+        logs(txtAreaLogActualizaciones, taskId)
+                
+        // ButtonDeleteReset
+        const btnDeleteReset = document.createElement("button")
+        btnDeleteReset.className="modalBtnDevolver"
+        btnDeleteReset.innerHTML="Resetear data"
+
+        btnDeleteReset.addEventListener('click', ()=>{
+            
+            inputTitleModal.value = null
+            txtAreaDescripcion.value = null
+            inputDeliveryDate.value = null
+            inputRdBtn1.checked = false
+            inputRdBtn2.checked = false
+            inputRdBtn3.checked = false
+
+        })
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 
         // Append de elementos del modal
         modal.append(buttonModalSalir, inputTitleModal, txtAreaDescripcion,inputDeliveryDate, divRdioBtn1,divRdioBtn2,divRdioBtn3,btnCrearActualizar,btnDeleteReset,txtAreaLogActualizaciones)
@@ -260,6 +355,15 @@ const viewModal = async ( typeModal, taskId ) => {
 
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * metodo para manejar los logs de las tareas
+ * @param {HTML tag} txtAreaLogActualizaciones 
+ * @param {Number} id 
+ */
+
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
 const logs = async(txtAreaLogActualizaciones, id) =>{
 
     const data = await getLog(urlLog)
@@ -283,3 +387,84 @@ const logs = async(txtAreaLogActualizaciones, id) =>{
 
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * metodo para eliminar un log asociado a una tarea
+ * @param {Object} task 
+ */
+
+const deleteLog = async(task) =>{
+    if(task.logs.length){
+        task.logs.forEach( log =>{
+            eliminarLog(log.id)
+        })
+    }
+}
+
+/**
+ * metodo para crear una tarea
+ * @param {HTML tag} inputTitleModal 
+ * @param {HTML tag} txtAreaDescripcion 
+ * @param {HTML tag} inputDeliveryDate 
+ * @param {HTML tag} inputRdBtn1 
+ * @param {HTML tag} inputRdBtn2 
+ * @param {HTML tag} inputRdBtn3 
+ */
+const enviarPostTask =async(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3)=>{
+    validar(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3) ? 
+    alert("Faltan datos por ingresar para enviar el formulario"):
+    await postFunction(
+        urlTask,
+        inputTitleModal.value,
+        txtAreaDescripcion.value,
+        btnChecked(inputRdBtn1,inputRdBtn2),
+        localStorage.getItem("id"),
+        inputDeliveryDate.value + "T00:00:00.00"
+    )
+}
+
+/**
+ * 
+ * @param {HTML tag} inputTitleModal 
+ * @param {HTML tag} txtAreaDescripcion 
+ * @param {HTML tag} inputDeliveryDate 
+ * @param {HTML tag} inputRdBtn1 
+ * @param {HTML tag} inputRdBtn2 
+ * @param {HTML tag} inputRdBtn3 
+ * @param {Number} taskId 
+ */
+const enviarPutTask=async(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3,taskId)=>{
+    validar(inputTitleModal,txtAreaDescripcion,inputDeliveryDate,inputRdBtn1,inputRdBtn2,inputRdBtn3,taskId) ? 
+    alert("Faltan datos por ingresar para enviar el formulario"): 
+    await putFunction(
+        urlTask,
+        taskId,
+        inputTitleModal.value,
+        txtAreaDescripcion.value,
+        btnChecked(inputRdBtn1,inputRdBtn2),
+        localStorage.getItem("id"),
+        inputDeliveryDate.value + "T00:00:00.00"
+    )
+    window.location.href = 'http://127.0.0.1:5501/Html/board.html';
+}
+
+botonSalirpagina.addEventListener('click', ()=>{
+    window.location.href = "http://127.0.0.1:5501/Html/index.html"
+})
+
+// Lanza la funcion que muestra el modal de crear si dan click
+todoButtonTitle.addEventListener('click', ()=>{
+    viewModal("Crear")
+})
+
+// Lanza la funcion que muestra el modal de crear si dan click
+inProcessButtonTitle.addEventListener('click', ()=>{
+    viewModal("Crear")
+})
+
+// Lanza la funcion que muestra el modal de crear si dan click
+finishButtonTitle.addEventListener('click', ()=>{
+    viewModal("Crear")
+})
+>>>>>>> bc3cc6e57c59a282a9ff5ef62afa61622603c445
